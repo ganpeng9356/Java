@@ -1,11 +1,11 @@
-select * from tbl_user;
+ï»¿select * from tbl_user;
 select * from tbl_car_record;
---×óÍâÁ¬½Ó
+--å·¦å¤–è¿æ¥
 select * from tbl_user u,tbl_car_record r
 where u.userid=r.userid(+);
 select * from tbl_user u left outer join
 tbl_car_record r on u.userid=r.userid;
---ÓÒÍâÁ¬½Ó
+--å³å¤–è¿æ¥
 select * from tbl_user u,tbl_car_record r
 where u.userid(+)=r.userid;
 select * from tbl_user u right outer join
@@ -33,13 +33,13 @@ where userid>=any(
    select userid from tbl_user
 );
 --union,intersect,minus
-select * from tbl_user where uname like 'È½%'
+select * from tbl_user where uname like 'å†‰%'
 union
 select * from tbl_user where uname like 'd%';
 select * from tbl_user where uname like 'd%'
 minus
 select * from tbl_user where uname like 'dy%';
---ÍêÕûĞÔÔ¼Êø
+--å®Œæ•´æ€§çº¦æŸ
 create table t(a int, 
 b int,
 primary key(a, b));
@@ -59,7 +59,7 @@ alter table tbl_sales
 add constraint fk_comid foreign key(comid)
 references tbl_company(comid);
 insert into tbl_sales values
-(seq_sales.nextval,'ÏîÄ¿X²¿',sysdate,7);
+(seq_sales.nextval,'é¡¹ç›®Xéƒ¨',sysdate,7);
 delete from tbl_company;
 create table ttt(a int primary key, 
 b int,
@@ -131,7 +131,7 @@ begin
       end loop;
       dbms_output.put_line(v_sum);
 end;
----¶¨Òå´æ´¢¹ı³Ì
+---å®šä¹‰å­˜å‚¨è¿‡ç¨‹
 create or replace procedure my_proc as
     v_start number:=1;
     v_sum number:=0;
@@ -142,7 +142,7 @@ begin
       end loop;
       dbms_output.put_line(v_sum);
   end my_proc;
---µ÷ÓÃmy_proc
+--è°ƒç”¨my_proc
 declare
 begin
   my_proc;
@@ -185,7 +185,7 @@ begin
   my_proc2(10,v_sum);
   dbms_output.put_line(v_sum);
   end;
--------¶¨Ê±ÈÎÎñµÄµ÷¶È
+-------å®šæ—¶ä»»åŠ¡çš„è°ƒåº¦
 create table tbl_job
 (jid number primary key,
 jname varchar2(20),
@@ -197,27 +197,27 @@ as
 begin
   insert into tbl_job values(seq_job.nextval,'job'||seq_job.currval,sysdate);
   end pro_job;
---Ìí¼ÓÈÎÎñ
+--æ·»åŠ ä»»åŠ¡
 declare
   job_no number;
 begin
   dbms_job.submit(job_no,'pro_job;',sysdate,'sysdate+1/1440');
   dbms_output.put_line('job no is'||job_no);
   end;
---²é¿´ÈÎÎñ
+--æŸ¥çœ‹ä»»åŠ¡
 select * from user_jobs;
 select * from tbl_job;
---ÔİÍ£
+--æš‚åœ
 declare
 begin
   dbms_job.broken(42,true);
   end;
---Æô¶¯
+--å¯åŠ¨
 declare
 begin
   dbms_job.run(42);
   end;
---É¾³ı
+--åˆ é™¤
 declare
 begin
   dbms_job.remove(42);

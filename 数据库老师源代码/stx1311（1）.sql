@@ -1,39 +1,39 @@
---´´½¨ÓÃ»§±ítbl_user
+ï»¿--åˆ›å»ºç”¨æˆ·è¡¨tbl_user
 create table tbl_user(
-    userid number primary key, --ÉèÖÃÖ÷¼ü
+    userid number primary key, --è®¾ç½®ä¸»é”®
     uname varchar2(30),
     upwd varchar2(32),
     ucreattime timestamp
 );
---´´½¨µ¥³µ±ítbl_car
+--åˆ›å»ºå•è½¦è¡¨tbl_car
 create table tbl_car(
-    cid number primary key, --ÉèÖÃÖ÷¼ü
+    cid number primary key, --è®¾ç½®ä¸»é”®
     cname varchar2(20),
     money number,
     state number,
     ctime timestamp
 );
---É¾³ı±í¶¨Òå
+--åˆ é™¤è¡¨å®šä¹‰
 drop table tbl_user;
 drop table tbl_car;
---´´½¨½è³µ¼ÇÂ¼±ítbl_car_record
+--åˆ›å»ºå€Ÿè½¦è®°å½•è¡¨tbl_car_record
 create table tbl_car_record(
-    rid number primary key,  --Ö÷¼ü
-    userid number,   --ÓÃ»§±àºÅ
-    cid number,        --³µ±àºÅ
-    stime timestamp,  --½è³öÊ±¼ä
-    endtime timestamp, --¹é»¹Ê±¼ä
+    rid number primary key,  --ä¸»é”®
+    userid number,   --ç”¨æˆ·ç¼–å·
+    cid number,        --è½¦ç¼–å·
+    stime timestamp,  --å€Ÿå‡ºæ—¶é—´
+    endtime timestamp, --å½’è¿˜æ—¶é—´
     rcode number
 );
 -----------------------------------------
---Ïò±íÖĞÌí¼ÓÊı¾İ
+--å‘è¡¨ä¸­æ·»åŠ æ•°æ®
 insert into tbl_user 
 values(1,'dyl','123',sysdate);
 insert into tbl_user(userid,uname,upwd)
 values(2,'ddyyll','456');
---²éÑ¯±íÖĞËùÓĞÊı¾İ
+--æŸ¥è¯¢è¡¨ä¸­æ‰€æœ‰æ•°æ®
 select * from tbl_user;
---´´½¨×ÔÔöĞòÁĞ£¬ÓÃÓÚ¸øÖ÷¼ü¸³Öµ
+--åˆ›å»ºè‡ªå¢åºåˆ—ï¼Œç”¨äºç»™ä¸»é”®èµ‹å€¼
 create sequence seq_user
 increment by 1 start with 3;
 create sequence seq_car
@@ -45,18 +45,18 @@ insert into tbl_user
 values(seq_user.nextval,'dyl3','234',sysdate);
 insert into tbl_user
 values(seq_user.nextval,'dyl4','111',sysdate);
-----ĞŞ¸Ä±íÖĞÊı¾İ
+----ä¿®æ”¹è¡¨ä¸­æ•°æ®
 update tbl_user set upwd='222' where userid=5;
 update tbl_user set uname='dyl44',upwd='444'
 where userid=4;
----É¾³ı±íÖĞÊı¾İ
+---åˆ é™¤è¡¨ä¸­æ•°æ®
 delete from tbl_user;
 delete from tbl_user where userid=5;
 delete from tbl_user
 where uname='dyl3' and upwd='234';
 select * from tbl_user;
 -------------------------------
---Ôö¼Óµ¥³µÊı¾İºÍµ¥³µÊ¹ÓÃ¼ÇÂ¼
+--å¢åŠ å•è½¦æ•°æ®å’Œå•è½¦ä½¿ç”¨è®°å½•
 insert into tbl_car
 values(seq_car.nextval,'car1',1,0,sysdate);
 insert into tbl_car
@@ -82,39 +82,39 @@ tbl_car_record(rid,userid,cid,stime,rcode)
 values(seq_car_record.nextval,6,2,sysdate,1223);
 update tbl_car set state=1 where cid=2;
 select * from tbl_car_record;
----------²éÑ¯Óï¾äÊ¹ÓÃ
+---------æŸ¥è¯¢è¯­å¥ä½¿ç”¨
 select * 
-from tbl_user;--±íÖĞËùÓĞÊı¾İ
---²éÑ¯±íÖĞÓÃ»§ÃûÎªdylµÄĞÅÏ¢
+from tbl_user;--è¡¨ä¸­æ‰€æœ‰æ•°æ®
+--æŸ¥è¯¢è¡¨ä¸­ç”¨æˆ·åä¸ºdylçš„ä¿¡æ¯
 select * from tbl_user where uname='dyl';
---²éÑ¯±íÖĞÓÃ»§ÃûÎªdylµÄÓÃ»§±àºÅ¡¢Ãû³Æ¸úÃÜÂë
+--æŸ¥è¯¢è¡¨ä¸­ç”¨æˆ·åä¸ºdylçš„ç”¨æˆ·ç¼–å·ã€åç§°è·Ÿå¯†ç 
 select userid,uname,upwd from tbl_user
 where uname='dyl';
---²éÑ¯±íÖĞÓÃ»§ÃûÎªdyl,ÃÜÂëÎª123µÄÓÃ»§±àºÅ
+--æŸ¥è¯¢è¡¨ä¸­ç”¨æˆ·åä¸ºdyl,å¯†ç ä¸º123çš„ç”¨æˆ·ç¼–å·
 select userid from tbl_user
 where uname='dyl' and upwd='123';
---²éÑ¯±íÖĞÓÃ»§ÃûÎªdyl»òÕßddyyllµÄÓÃ»§ĞÅÏ¢
+--æŸ¥è¯¢è¡¨ä¸­ç”¨æˆ·åä¸ºdylæˆ–è€…ddyyllçš„ç”¨æˆ·ä¿¡æ¯
 select * from tbl_user
 where uname='dyl' or uname='ddyyll';
---²éÑ¯±íÖĞÓÃ»§ÃûÒÔdd¿ªÍ·µÄÓÃ»§ĞÅÏ¢£¬Ä£ºı²éÑ¯
+--æŸ¥è¯¢è¡¨ä¸­ç”¨æˆ·åä»¥ddå¼€å¤´çš„ç”¨æˆ·ä¿¡æ¯ï¼Œæ¨¡ç³ŠæŸ¥è¯¢
 select * from tbl_user
 where uname like 'dd%';
 select * from tbl_user
 where uname like '%y%';
 select * from tbl_user
 where uname like '_y%';
---oracle×Ö·û´®µÄÆ´½Ó||
---½«ÓÃ»§Ãû¡¢ÃÜÂëÆ´½ÓÎªÒ»ÁĞ·µ»Ø
+--oracleå­—ç¬¦ä¸²çš„æ‹¼æ¥||
+--å°†ç”¨æˆ·åã€å¯†ç æ‹¼æ¥ä¸ºä¸€åˆ—è¿”å›
 select uname||upwd from tbl_user;
---È¡±ğÃû
+--å–åˆ«å
 select uname||upwd napw from tbl_user;
 select uname||upwd as napw from tbl_user;
 select u.userid,u.uname from tbl_user u;
---¶ÔÈÕÆÚµÄ²Ù×÷
---·µ»ØÓÃ»§Ãû£¬¼°Æä×¢²áÊ±¼ä£¬°´ÕÕ"Äê-ÔÂ-ÈÕ Ê±£º·Ö£ºÃë"¸ñÊ½·µ»Ø
+--å¯¹æ—¥æœŸçš„æ“ä½œ
+--è¿”å›ç”¨æˆ·åï¼ŒåŠå…¶æ³¨å†Œæ—¶é—´ï¼ŒæŒ‰ç…§"å¹´-æœˆ-æ—¥ æ—¶ï¼šåˆ†ï¼šç§’"æ ¼å¼è¿”å›
 select uname,to_char(ucreattime,'YYYY-MM-DD hh24:mi:ss') ctime
 from tbl_user;
---·µ»Ø×î´ó×â½ğ¡¢×îĞ¡×â½ğ¡¢×Ü×â½ğ¡¢µ¥³µÊıÁ¿
+--è¿”å›æœ€å¤§ç§Ÿé‡‘ã€æœ€å°ç§Ÿé‡‘ã€æ€»ç§Ÿé‡‘ã€å•è½¦æ•°é‡
 select max(money),min(money),sum(money),count(*)
 from tbl_car;
 --
@@ -128,13 +128,13 @@ values(seq_car_record.nextval,6,3,sysdate,1233);
 insert into 
 tbl_car_record(rid,userid,cid,stime,rcode)
 values(seq_car_record.nextval,2,2,sysdate,1253);
---ÇóÃ¿¸öÓÃ»§×Ü¹²×âÓÃµÄµ¥³µÊıÁ¿,½á¹ûÎªÓÃ»§±àºÅ¡¢µ¥³µÊıÁ¿
+--æ±‚æ¯ä¸ªç”¨æˆ·æ€»å…±ç§Ÿç”¨çš„å•è½¦æ•°é‡,ç»“æœä¸ºç”¨æˆ·ç¼–å·ã€å•è½¦æ•°é‡
 select userid,count(userid)
 from tbl_car_record
 group by userid;
---ÇóÃ¿¸öÓÃ»§×Ü¹²×âÓÃµÄµ¥³µÊıÁ¿
---°´ÕÕµ¥³µÊıÁ¿´Ó¸ßµ½µÍÅÅĞò
---½á¹ûÎªÓÃ»§±àºÅ¡¢µ¥³µÊıÁ¿
+--æ±‚æ¯ä¸ªç”¨æˆ·æ€»å…±ç§Ÿç”¨çš„å•è½¦æ•°é‡
+--æŒ‰ç…§å•è½¦æ•°é‡ä»é«˜åˆ°ä½æ’åº
+--ç»“æœä¸ºç”¨æˆ·ç¼–å·ã€å•è½¦æ•°é‡
 select userid,count(userid)
 from tbl_car_record
 group by userid
@@ -143,42 +143,42 @@ select userid,count(userid)
 from tbl_car_record
 group by userid
 order by count(userid) desc;
---ÇóÃ¿¸öÓÃ»§×Ü¹²×âÓÃµÄµ¥³µÊıÁ¿
---µ¥³µÊıÁ¿´óÓÚµÈÓÚ2´Î²Å·µ»Ø
---°´ÕÕµ¥³µÊıÁ¿´Ó¸ßµ½µÍÅÅĞò
---½á¹ûÎªÓÃ»§±àºÅ¡¢µ¥³µÊıÁ¿
+--æ±‚æ¯ä¸ªç”¨æˆ·æ€»å…±ç§Ÿç”¨çš„å•è½¦æ•°é‡
+--å•è½¦æ•°é‡å¤§äºç­‰äº2æ¬¡æ‰è¿”å›
+--æŒ‰ç…§å•è½¦æ•°é‡ä»é«˜åˆ°ä½æ’åº
+--ç»“æœä¸ºç”¨æˆ·ç¼–å·ã€å•è½¦æ•°é‡
 select userid,count(userid)
 from tbl_car_record
 group by userid having count(userid)>=2
 order by count(userid) desc;
-----------¶à±í²éÑ¯
---²éÑ¯ÓÃ»§ÃûÊ¹ÓÃµÄ½è³µ¼ÇÂ¼£¬
---½á¹ûÎªÓÃ»§Ãû£¬µ¥³µ±àºÅ£¬½èÓÃÊ±¼ä
+----------å¤šè¡¨æŸ¥è¯¢
+--æŸ¥è¯¢ç”¨æˆ·åä½¿ç”¨çš„å€Ÿè½¦è®°å½•ï¼Œ
+--ç»“æœä¸ºç”¨æˆ·åï¼Œå•è½¦ç¼–å·ï¼Œå€Ÿç”¨æ—¶é—´
 select uname,cid,stime
 from tbl_user,tbl_car_record
 where tbl_user.userid=tbl_car_record.userid;
 select u.userid,uname,cid,stime
 from tbl_user u,tbl_car_record r
 where u.userid=r.userid;
---²éÑ¯µ¥³µÊ¹ÓÃµÄ½è³µ¼ÇÂ¼£¬
---½á¹ûÎªµ¥³µÃû³Æ£¬ÓÃ»§±àºÅ£¬½èÓÃÊ±¼ä
+--æŸ¥è¯¢å•è½¦ä½¿ç”¨çš„å€Ÿè½¦è®°å½•ï¼Œ
+--ç»“æœä¸ºå•è½¦åç§°ï¼Œç”¨æˆ·ç¼–å·ï¼Œå€Ÿç”¨æ—¶é—´
 select cname,userid,ctime
 from tbl_car_record r,tbl_car c
 where r.cid=c.cid;
---²éÑ¯ÓÃ»§Ê¹ÓÃµ¥³µµÄ½è³µ¼ÇÂ¼£¬
---½á¹ûÎªÓÃ»§Ãû³Æ£¬µ¥³µÃû³Æ£¬½èÓÃÊ±¼ä
+--æŸ¥è¯¢ç”¨æˆ·ä½¿ç”¨å•è½¦çš„å€Ÿè½¦è®°å½•ï¼Œ
+--ç»“æœä¸ºç”¨æˆ·åç§°ï¼Œå•è½¦åç§°ï¼Œå€Ÿç”¨æ—¶é—´
 select uname,cname,ctime
 from tbl_user u,tbl_car_record r,tbl_car c
 where u.userid=r.userid and r.cid=c.cid;
---·µ»ØÃ¿¸öÓÃ»§Ãû³ÆËù½èÓÃµÄµ¥³µµÄÊıÁ¿
---½á¹ûÎª£ºÓÃ»§Ãû³Æ   µ¥³µ½èÓÃÊıÁ¿
+--è¿”å›æ¯ä¸ªç”¨æˆ·åç§°æ‰€å€Ÿç”¨çš„å•è½¦çš„æ•°é‡
+--ç»“æœä¸ºï¼šç”¨æˆ·åç§°   å•è½¦å€Ÿç”¨æ•°é‡
 select uname,count(*)
 from tbl_user u,tbl_car_record r
 where u.userid=r.userid
 group by u.userid,uname
 order by count(*);
---·µ»ØÃ¿Á¾µ¥³µËù½èÓÃµÄ´ÎÊı
---½á¹ûÎª£ºµ¥³µÃû³Æ   ´ÎÊı
+--è¿”å›æ¯è¾†å•è½¦æ‰€å€Ÿç”¨çš„æ¬¡æ•°
+--ç»“æœä¸ºï¼šå•è½¦åç§°   æ¬¡æ•°
 select cname,count(*)
 from tbl_car c,tbl_car_record r
 where c.cid=r.cid

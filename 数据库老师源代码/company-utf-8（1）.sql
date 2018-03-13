@@ -1,111 +1,111 @@
-create table tbl_company(
-    comid number primary key, --¹«Ë¾±àºÅ
-    cname varchar2(50) unique, --¹«Ë¾Ãû
-    amount number, --¹«Ë¾ÈËÊı
-    createtime timestamp  --´´½¨Ê±¼ä
+ï»¿create table tbl_company(
+    comid number primary key, --å…¬å¸ç¼–å·
+    cname varchar2(50) unique, --å…¬å¸å
+    amount number, --å…¬å¸äººæ•°
+    createtime timestamp  --åˆ›å»ºæ—¶é—´
 );
-drop table tbl_sales;--É¾³ıÒ»ÕÅ±í
+drop table tbl_sales;--åˆ é™¤ä¸€å¼ è¡¨
 create table tbl_sales(
     slid number primary key,
-    slname varchar2(50) unique,--ÏúÊÛµãÃû³Æ
+    slname varchar2(50) unique,--é”€å”®ç‚¹åç§°
     createtime timestamp,
     comid number
 );
 create table tbl_user(
     userid number primary key,
-    uname varchar2(30) unique, --ÓÃ»§Ãû
-    upwd char(32) not null, --ÃÜÂë
-    job varchar2(30),  --Ö°Òµ
-    createtime timestamp, --×¢²áÊ±¼ä
-    slid number  --ËùÊôÏúÊÛµã
+    uname varchar2(30) unique, --ç”¨æˆ·å
+    upwd char(32) not null, --å¯†ç 
+    job varchar2(30),  --èŒä¸š
+    createtime timestamp, --æ³¨å†Œæ—¶é—´
+    slid number  --æ‰€å±é”€å”®ç‚¹
 );
---²åÈëÒ»Ğ©Êı¾İ
+--æ’å…¥ä¸€äº›æ•°æ®
 insert into tbl_company values
-(1,'Ë«ÌåÏµ',120,sysdate);
+(1,'åŒä½“ç³»',120,sysdate);
 insert into tbl_company values
-(2,'ÓÃÓÑ',1000,sysdate);
+(2,'ç”¨å‹',1000,sysdate);
 insert into tbl_company values
-(3,'½ğµû',800,sysdate);
---ÀûÓÃoracleÌá¹©µÄĞòÁĞ¶ÔÏóÀ´¸øÖ÷¼ü¸³Öµ
-create sequence seq_sales --¸øsales±í
+(3,'é‡‘è¶',800,sysdate);
+--åˆ©ç”¨oracleæä¾›çš„åºåˆ—å¯¹è±¡æ¥ç»™ä¸»é”®èµ‹å€¼
+create sequence seq_sales --ç»™salesè¡¨
 increment by 1 start with 1;
-create sequence seq_user --¸øuser±í
+create sequence seq_user --ç»™userè¡¨
 increment by 1 start with 1;
 
 insert into tbl_sales values
-(seq_sales.nextval,'ÏîÄ¿Ò»²¿',sysdate,1);
+(seq_sales.nextval,'é¡¹ç›®ä¸€éƒ¨',sysdate,1);
 insert into tbl_sales values
-(seq_sales.nextval,'ÏîÄ¿¶ş²¿',sysdate,1);
+(seq_sales.nextval,'é¡¹ç›®äºŒéƒ¨',sysdate,1);
 insert into tbl_sales values
-(seq_sales.nextval,'ÏîÄ¿Èı²¿',sysdate,1);
+(seq_sales.nextval,'é¡¹ç›®ä¸‰éƒ¨',sysdate,1);
 insert into tbl_sales values
-(seq_sales.nextval,'ÖØÇìÒ»²¿',sysdate,2);
+(seq_sales.nextval,'é‡åº†ä¸€éƒ¨',sysdate,2);
 insert into tbl_sales values
-(seq_sales.nextval,'ÖØÇì¶ş²¿',sysdate,2);
+(seq_sales.nextval,'é‡åº†äºŒéƒ¨',sysdate,2);
 insert into tbl_sales values
-(seq_sales.nextval,'³É¶¼Ò»²¿',sysdate,3);
+(seq_sales.nextval,'æˆéƒ½ä¸€éƒ¨',sysdate,3);
 select * from tbl_sales;
---²éÑ¯Óï¾äÊ¹ÓÃ
---²éÑ¯¹«Ë¾µÄÃû³Æ¸úÈËÊı
+--æŸ¥è¯¢è¯­å¥ä½¿ç”¨
+--æŸ¥è¯¢å…¬å¸çš„åç§°è·Ÿäººæ•°
 select cname,amount from tbl_company;
---²éÑ¯ÓÃÓÑ¹«Ë¾µÄÈËÊı
+--æŸ¥è¯¢ç”¨å‹å…¬å¸çš„äººæ•°
 select amount from tbl_company
-where cname='ÓÃÓÑ';
---²éÑ¯ÈËÊıÔÚ500ÈËÒÔÉÏµÄ¹«Ë¾ĞÅÏ¢
+where cname='ç”¨å‹';
+--æŸ¥è¯¢äººæ•°åœ¨500äººä»¥ä¸Šçš„å…¬å¸ä¿¡æ¯
 select * from tbl_company where amount>=500;
---²éÑ¯³ö¹«Ë¾ÒÔ'ÓÃ'¿ªÊ¼µÄ²¢ÇÒÈËÊıÔÚ500ÈËÒÔÉÏµÄ¹«Ë¾ĞÅÏ¢
+--æŸ¥è¯¢å‡ºå…¬å¸ä»¥'ç”¨'å¼€å§‹çš„å¹¶ä¸”äººæ•°åœ¨500äººä»¥ä¸Šçš„å…¬å¸ä¿¡æ¯
 select * from tbl_company
-where amount>=500 and cname like 'ÓÃ%';
+where amount>=500 and cname like 'ç”¨%';
 select * from tbl_company
-where amount>=500 or cname like 'ÓÃ%';
---×Ö·û´®Æ´½Ó
+where amount>=500 or cname like 'ç”¨%';
+--å­—ç¬¦ä¸²æ‹¼æ¥
 select comid||cname||amount from tbl_company;
---¸øÁĞÃû»òÕß±íÃûÈ¡±ğÃû
+--ç»™åˆ—åæˆ–è€…è¡¨åå–åˆ«å
 select comid||cname||amount res from tbl_company;
 select c.cname from tbl_company c;
---·Ö×éº¯ÊıµÄÊ¹ÓÃ
+--åˆ†ç»„å‡½æ•°çš„ä½¿ç”¨
 select max(amount),min(amount)
 ,avg(amount),sum(amount),count(*)
 from tbl_company;
---nvl(×Ö¶Î,Ä¬ÈÏÏÔÊ¾Öµ)
+--nvl(å­—æ®µ,é»˜è®¤æ˜¾ç¤ºå€¼)
 select * from tbl_user;
 insert into tbl_user(userid,uname,upwd,slid)
-values(seq_user.nextval,'ºÀºÀ','3e851763b34a3fc62b72c86969f5027f',3);
-select uname,nvl(job,'´ıÒµ') job from tbl_user;
---ÈÕÆÚ´¦Àí
+values(seq_user.nextval,'è±ªè±ª','3e851763b34a3fc62b72c86969f5027f',3);
+select uname,nvl(job,'å¾…ä¸š') job from tbl_user;
+--æ—¥æœŸå¤„ç†
 select * from tbl_company;
 select cname,to_char(createtime, 'yyyy/mm/dd hh24:mi:ss') createtime 
 from tbl_company;
 select cname,to_char(createtime, 'yyyy-mm-dd') 
 from tbl_company;
---²é¿´Ã¿¸ö¹«Ë¾ÓĞ¶àÉÙ¸öÏúÊÛµã
+--æŸ¥çœ‹æ¯ä¸ªå…¬å¸æœ‰å¤šå°‘ä¸ªé”€å”®ç‚¹
 select comid,count(*)
 from tbl_sales
 group by comid;
---²é¿´¹«Ë¾ÏúÊÛµãÖÁÉÙ2¸öµÄ¹«Ë¾±àºÅ¸úÏúÊÛµãÊıÁ¿
+--æŸ¥çœ‹å…¬å¸é”€å”®ç‚¹è‡³å°‘2ä¸ªçš„å…¬å¸ç¼–å·è·Ÿé”€å”®ç‚¹æ•°é‡
 select comid,count(*)
 from tbl_sales
 group by comid
 having count(*)>=2;
---²é¿´Ã¿¸ö¹«Ë¾ÓĞ¶àÉÙ¸öÏúÊÛµã
---²¢°´ÕÕÏúÊÛµãÊıÁ¿´Ó´óµ½Ğ¡ÅÅĞò
+--æŸ¥çœ‹æ¯ä¸ªå…¬å¸æœ‰å¤šå°‘ä¸ªé”€å”®ç‚¹
+--å¹¶æŒ‰ç…§é”€å”®ç‚¹æ•°é‡ä»å¤§åˆ°å°æ’åº
 select comid,count(*)
 from tbl_sales
 group by comid
-order by count(*); --Ä¬ÈÏorder by ÉıĞò
+order by count(*); --é»˜è®¤order by å‡åº
 select comid,count(*)
 from tbl_sales
 group by comid
 order by count(*) desc;
---ÏÔÊ¾³ö¹«Ë¾ºÍÏúÊÛµãÃû³Æ
+--æ˜¾ç¤ºå‡ºå…¬å¸å’Œé”€å”®ç‚¹åç§°
 select cname,slname from tbl_company c,tbl_sales s
 where c.comid=s.comid;
---ÏÔÊ¾³öÃ¿¸ö¹«Ë¾ÓµÓĞµÄÏúÊÛµãÊıÁ¿
+--æ˜¾ç¤ºå‡ºæ¯ä¸ªå…¬å¸æ‹¥æœ‰çš„é”€å”®ç‚¹æ•°é‡
 select cname,count(*) total 
 from tbl_company c,tbl_sales s
 where c.comid=s.comid
 group by c.comid,cname;
---ÏÔÊ¾³öÃ¿¸ö¹«Ë¾ÓµÓĞµÄÏúÊÛµãÊıÁ¿´óÓÚµÈÓÚ2
+--æ˜¾ç¤ºå‡ºæ¯ä¸ªå…¬å¸æ‹¥æœ‰çš„é”€å”®ç‚¹æ•°é‡å¤§äºç­‰äº2
 select cname,count(*) total 
 from tbl_company c,tbl_sales s
 where c.comid=s.comid
@@ -118,11 +118,11 @@ where c.comid=s.comid
 group by c.comid,cname
 having count(*)>=2
 order by total;
---²é¿´¹«Ë¾½¨Á¢µÄÏúÊÛµã¶ÔÓ¦µÄÈËÔ±Ãûµ¥
+--æŸ¥çœ‹å…¬å¸å»ºç«‹çš„é”€å”®ç‚¹å¯¹åº”çš„äººå‘˜åå•
 select cname,slname,uname,job
 from tbl_company c,tbl_sales s,tbl_user u
 where c.comid=s.comid and u.slid=s.slid;
---²é¿´Ã¿¸ö¹«Ë¾ÔÚÃ¿¸öÏúÊÛµãµÄÈËÔ±ÊıÁ¿
+--æŸ¥çœ‹æ¯ä¸ªå…¬å¸åœ¨æ¯ä¸ªé”€å”®ç‚¹çš„äººå‘˜æ•°é‡
 select cname,slname,count(*) total 
 from tbl_company c,tbl_sales s,tbl_user u 
 where c.comid=s.comid and u.slid=s.slid 
@@ -132,10 +132,10 @@ order by count(*) desc;
 select slname from tbl_sales
 where comid in (
     select comid from tbl_company
-    where cname='Ë«ÌåÏµ' or cname='ÓÃÓÑ'
+    where cname='åŒä½“ç³»' or cname='ç”¨å‹'
 );
 select slname from tbl_sales s,tbl_company c
 where s.comid=c.comid 
-and cname='Ë«ÌåÏµ' or cname='ÓÃÓÑ';
+and cname='åŒä½“ç³»' or cname='ç”¨å‹';
 
 select * from tbl_user;
